@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(node --version)",
+      "Bash(bun --version)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx vite build)"
+    ]
+  }
+}

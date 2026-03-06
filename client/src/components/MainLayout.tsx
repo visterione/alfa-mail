@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../api';
 import { useStore } from '../store';
@@ -7,11 +7,13 @@ import MessageList from './MessageList';
 import MessageViewer from './MessageViewer';
 import ComposeModal from './ComposeModal';
 import SearchResults from './SearchResults';
+import AdminPanel from './AdminPanel';
 
 export default function MainLayout() {
   const { activeMailbox, setActiveMailbox, composeOpen, isSearching } = useStore();
+  const [adminOpen, setAdminOpen] = useState(false);
 
-  const { data: mailboxes } = useQuery({
+  const { data: mailboxes, refetch: refetchMailboxes } = useQuery({
     queryKey: ['mailboxes'],
     queryFn: () => api.getMailboxes(),
   });
@@ -23,10 +25,16 @@ export default function MainLayout() {
     }
   }, [mailboxes, activeMailbox, setActiveMailbox]);
 
+  function handleAdminClose() {
+    setAdminOpen(false);
+    // Refresh mailboxes list in case admin added new ones
+    refetchMailboxes();
+  }
+
   return (
     <div className="h-full flex bg-[#f5f5f7]">
       {/* Sidebar */}
-      <Sidebar mailboxes={mailboxes ?? []} />
+      <Sidebar mailboxes={mailboxes ?? []} onOpenAdmin={() => setAdminOpen(true)} />
 
       {/* Content area */}
       <div className="flex flex-1 min-w-0 gap-0 p-3 pl-0">
@@ -41,8 +49,9 @@ export default function MainLayout() {
         </div>
       </div>
 
-      {/* Compose modal */}
+      {/* Modals */}
       {composeOpen && <ComposeModal />}
+      {adminOpen && <AdminPanel onClose={handleAdminClose} />}
     </div>
   );
 }

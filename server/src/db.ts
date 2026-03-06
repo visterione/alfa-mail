@@ -103,10 +103,18 @@ export async function initDb(): Promise<void> {
       mailbox_id INTEGER NOT NULL REFERENCES mailboxes(id) ON DELETE CASCADE,
       folder TEXT NOT NULL,
       last_uid INTEGER NOT NULL DEFAULT 0,
+      full_sync_done INTEGER NOT NULL DEFAULT 0,
       last_synced INTEGER,
       PRIMARY KEY (mailbox_id, folder)
     );
   `);
+
+  // Migration: add full_sync_done if upgrading from older schema
+  try {
+    await db.execute('ALTER TABLE sync_state ADD COLUMN full_sync_done INTEGER NOT NULL DEFAULT 0');
+  } catch {
+    // Column already exists — ignore
+  }
 }
 
 export type User = {

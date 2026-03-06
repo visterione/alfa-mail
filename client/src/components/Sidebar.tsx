@@ -50,7 +50,7 @@ interface Props {
   mailboxes: MailboxInfo[];
 }
 
-export default function Sidebar({ mailboxes }: Props) {
+export default function Sidebar({ mailboxes, onOpenAdmin }: Props & { onOpenAdmin: () => void }) {
   const { activeMailbox, setActiveMailbox, activeFolder, setActiveFolder, openCompose, setSearchQuery, setIsSearching, user, setUser } = useStore();
   const [mailboxOpen, setMailboxOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
@@ -170,9 +170,9 @@ export default function Sidebar({ mailboxes }: Props) {
             <p className="text-[10px] text-muted truncate">{user?.username}</p>
           </div>
           {user?.is_admin ? (
-            <a href="/admin" className="p-1.5 rounded-lg hover:bg-[#f5f5f7] transition-colors text-muted">
+            <button onClick={onOpenAdmin} className="p-1.5 rounded-lg hover:bg-[#f5f5f7] transition-colors text-muted" title="Настройки">
               <Settings size={14} />
-            </a>
+            </button>
           ) : null}
           <button onClick={handleLogout} className="p-1.5 rounded-lg hover:bg-[#f5f5f7] transition-colors text-muted">
             <LogOut size={14} />

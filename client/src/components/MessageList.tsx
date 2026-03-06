@@ -37,6 +37,16 @@ export default function MessageList() {
 
   const messages = data?.pages.flatMap((p) => p.messages) ?? [];
   const total = data?.pages[0]?.total ?? 0;
+  const syncProgress = data?.pages[0]?.syncProgress ?? null;
+
+  // Poll more frequently while background sync is running
+  useEffect(() => {
+    if (!syncProgress || !activeMailbox) return;
+    const interval = setInterval(() => {
+      qc.invalidateQueries({ queryKey: ['messages', activeMailbox.id, activeFolder] });
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [!!syncProgress, activeMailbox, activeFolder, qc]);
 
   // Infinite scroll
   const handleObserver = useCallback(
@@ -92,11 +102,29 @@ export default function MessageList() {
   return (
     <div className="bg-white rounded-2xl shadow-card flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-[#f5f5f7] flex items-center justify-between flex-shrink-0">
-        <h2 className="text-sm font-semibold text-[#1d1d1f]">
-          {activeFolder === 'INBOX' ? 'Входящие' : activeFolder}
-        </h2>
-        <span className="text-xs text-muted">{total > 0 ? `${total}` : ''}</span>
+      <div className="px-4 py-3 border-b border-[#f5f5f7] flex-shrink-0">
+        <div className="flex items-center justify-between">
+          <h2 className="text-sm font-semibold text-[#1d1d1f]">
+            {activeFolder === 'INBOX' ? 'Входящие' : activeFolder}
+          </h2>
+          <span className="text-xs text-muted">{total > 0 ? `${total}` : ''}</span>
+        </div>
+        {syncProgress && (
+          <div className="mt-2">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[10px] text-muted">Синхронизация писем...</span>
+              <span className="text-[10px] text-muted">
+                {Math.round((syncProgress.done / syncProgress.total) * 100)}%
+              </span>
+            </div>
+            <div className="h-1 bg-[#f5f5f7] rounded-full overflow-hidden">
+              <div
+                className="h-full bg-accent rounded-full transition-all duration-500"
+                style={{ width: `${Math.round((syncProgress.done / syncProgress.total) * 100)}%` }}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       {/* List */}

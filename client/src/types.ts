@@ -41,6 +41,7 @@ export interface MessageSummary {
 export interface MessagesPage {
   total: number;
   messages: MessageSummary[];
+  syncProgress: { done: number; total: number } | null;
 }
 
 export interface MessageFull {

@@ -34,43 +34,43 @@ export default function LoginPage() {
               <rect x="3" y="6" width="18" height="13" rx="2" stroke="white" strokeWidth="2"/>
             </svg>
           </div>
-          <h1 className="text-2xl font-semibold text-[#1d1d1f] tracking-tight">AlfaMail</h1>
-          <p className="text-sm text-muted mt-1">Корпоративная почта</p>
+          <h1 className="text-3xl font-semibold text-[#1d1d1f] tracking-tight">AlfaMail</h1>
+          <p className="text-[15px] text-muted mt-1">Корпоративная почта</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-[#1d1d1f] mb-1.5">Логин</label>
+            <label className="block text-[15px] font-medium text-[#1d1d1f] mb-1.5">Логин</label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-[#f5f5f7] rounded-xl text-sm outline-none focus:ring-2 focus:ring-accent/30 transition-shadow placeholder:text-[#aeaeb2]"
+              className="w-full px-3.5 py-3 bg-[#f5f5f7] rounded-xl text-[15px] outline-none focus:ring-2 focus:ring-accent/30 transition-shadow placeholder:text-[#aeaeb2]"
               placeholder="Ваш логин"
               autoFocus
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#1d1d1f] mb-1.5">Пароль</label>
+            <label className="block text-[15px] font-medium text-[#1d1d1f] mb-1.5">Пароль</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-[#f5f5f7] rounded-xl text-sm outline-none focus:ring-2 focus:ring-accent/30 transition-shadow placeholder:text-[#aeaeb2]"
+              className="w-full px-3.5 py-3 bg-[#f5f5f7] rounded-xl text-[15px] outline-none focus:ring-2 focus:ring-accent/30 transition-shadow placeholder:text-[#aeaeb2]"
               placeholder="••••••••"
               required
             />
           </div>
 
           {error && (
-            <p className="text-xs text-red-500 bg-red-50 rounded-xl px-3 py-2">{error}</p>
+            <p className="text-sm text-red-500 bg-red-50 rounded-xl px-3 py-2">{error}</p>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-accent hover:bg-accent-hover text-white py-2.5 rounded-xl text-sm font-medium transition-colors disabled:opacity-60"
+            className="w-full bg-accent hover:bg-accent-hover text-white py-3 rounded-xl text-[15px] font-medium transition-colors disabled:opacity-60"
           >
             {loading ? 'Вход...' : 'Войти'}
           </button>

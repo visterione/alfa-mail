@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(node --input-type=module -e \"import\\(''./src/index.ts''\\)\")",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 6184 /F)",
+      "Bash(cmd //c \"taskkill /PID 6184 /F\")",
+      "Bash(curl -s -X POST http://localhost:3001/api/auth/login -H \"Content-Type: application/json\" -d '{\"\"username\"\":\"\"admin\"\",\"\"password\"\":\"\"test\"\"}')",
+      "Bash(npm run build)",
+      "Bash(node -e \"import\\(''@tiptap/react''\\).then\\(m => console.log\\(''ok'', Object.keys\\(m\\)\\)\\).catch\\(e => console.error\\(''err'', e.message\\)\\)\")",
+      "Bash(node -e \"import\\(''c:/alfa-mail/client/node_modules/@tiptap/extension-underline/dist/index.js''\\).then\\(m => console.log\\(Object.keys\\(m\\)\\)\\).catch\\(e => console.error\\(e.message\\)\\)\")",
+      "Bash(node -e \"import\\(''c:/alfa-mail/client/node_modules/@tiptap/extension-placeholder/dist/index.js''\\).then\\(m => console.log\\(Object.keys\\(m\\)\\)\\).catch\\(e => console.error\\(e.message\\)\\)\")",
+      "Bash(grep -o '\"\"RemoveFormatting\"\"\\\\|\"\"Strikethrough\"\"\\\\|\"\"ListOrdered\"\"\\\\|\"\"Undo2\"\"\\\\|\"\"Redo2\"\"' c:/alfa-mail/client/node_modules/lucide-react/dist/cjs/lucide-react.js)",
+      "Bash(node -e \"console.log\\(require\\(''./node_modules/@tanstack/react-virtual/package.json''\\).version\\)\")",
+      "Bash(npm run dev)",
+      "Read(//c/Users/stece/AppData/Local/Temp/claude/c--alfa-mail/tasks/**)",
+      "Bash(node --input-type=module:*)",
+      "Bash(npx tsx src/index.ts)",
+      "Bash(node -e \"console.log\\(require\\(''./node_modules/@fastify/compress/package.json''\\).version\\)\")",
+      "Bash(npm uninstall @libsql/client)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\stece\\.claude\\projects\\c--alfa-mail"
+    ]
+  }
+}

@@ -16,7 +16,9 @@ interface AppState {
 
   composeOpen: boolean;
   composeDefaults: Partial<{
+    draftId: number;
     to: string;
+    cc: string;
     subject: string;
     inReplyTo: string;
     references: string;
@@ -29,6 +31,9 @@ interface AppState {
   setSearchQuery: (q: string) => void;
   isSearching: boolean;
   setIsSearching: (v: boolean) => void;
+
+  userSettingsOpen: boolean;
+  setUserSettingsOpen: (v: boolean) => void;
 }
 
 export const useStore = create<AppState>((set) => ({
@@ -53,4 +58,7 @@ export const useStore = create<AppState>((set) => ({
   setSearchQuery: (q) => set({ searchQuery: q }),
   isSearching: false,
   setIsSearching: (v) => set({ isSearching: v }),
+
+  userSettingsOpen: false,
+  setUserSettingsOpen: (v) => set({ userSettingsOpen: v }),
 }));

@@ -36,6 +36,25 @@
   }
 }
 
+/* ─── TipTap rich text editor ─────────────────────────────────────── */
+.prose-editor p { margin: 0 0 0.25em 0; }
+.prose-editor p:last-child { margin-bottom: 0; }
+.prose-editor ul { list-style-type: disc; padding-left: 1.5em; margin: 0.25em 0; }
+.prose-editor ol { list-style-type: decimal; padding-left: 1.5em; margin: 0.25em 0; }
+.prose-editor li { margin: 0.1em 0; }
+.prose-editor a { color: #0071e3; text-decoration: underline; }
+.prose-editor strong { font-weight: 600; }
+.prose-editor em { font-style: italic; }
+.prose-editor s { text-decoration: line-through; }
+.prose-editor .tiptap { outline: none; }
+.prose-editor .tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #aeaeb2;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
 @layer utilities {
   .text-muted {
     color: #6e6e73;
@@ -46,4 +65,36 @@
   .bg-sidebar {
     background-color: #f5f5f7;
   }
+}
+
+/* ─── Apple-style animations ──────────────────────────────────────── */
+@keyframes dropdown-in {
+  from { opacity: 0; transform: scale(0.96) translateY(-6px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.97) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+
+.animate-dropdown {
+  animation: dropdown-in 0.17s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  transform-origin: top center;
+}
+.animate-fade-up {
+  animation: fade-up 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.animate-fade-in {
+  animation: fade-in 0.15s ease both;
+}
+.animate-modal {
+  animation: modal-in 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
